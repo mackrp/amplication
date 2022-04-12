@@ -29,6 +29,13 @@ model Datum {
   usCan      EnumDatumUsCan?
 }
 
+model Country {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String
+  updatedAt DateTime @updatedAt
+}
+
 enum EnumDatumUsCan {
   US
   CA
