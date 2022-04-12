@@ -18,22 +18,20 @@ model User {
   username  String   @unique
 }
 
-model Datum {
-  address    String?
-  country    Country? @relation(fields: [countryId], references: [id])
-  countryId  String?
-  createdAt  DateTime @default(now())
-  id         String   @id @default(cuid())
-  internalId Int?
-  name       String?
-  notes      String?
-  updatedAt  DateTime @updatedAt
+model Property {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  location  String?
+  name      String?
+  units     Unit[]
+  updatedAt DateTime @updatedAt
 }
 
-model Country {
-  createdAt DateTime @default(now())
-  data      Datum[]
-  id        String   @id @default(cuid())
-  name      String
-  updatedAt DateTime @updatedAt
+model Unit {
+  createdAt  DateTime  @default(now())
+  id         String    @id @default(cuid())
+  name       String?
+  property   Property? @relation(fields: [propertyId], references: [id])
+  propertyId String?
+  updatedAt  DateTime  @updatedAt
 }

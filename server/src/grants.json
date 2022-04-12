@@ -31,61 +31,61 @@
   },
   {
     "role": "user",
-    "resource": "Datum",
+    "resource": "Property",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Datum",
+    "resource": "Property",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Datum",
+    "resource": "Property",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Datum",
+    "resource": "Property",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Datum",
+    "resource": "Property",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Country",
+    "resource": "Unit",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Country",
+    "resource": "Unit",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Country",
+    "resource": "Unit",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Country",
+    "resource": "Unit",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Country",
+    "resource": "Unit",
     "action": "read:any",
     "attributes": "*"
   }
