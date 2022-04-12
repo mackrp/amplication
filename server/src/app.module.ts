@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { UserModule } from "./user/user.module";
-import { DatumModule } from "./datum/datum.module";
-import { CountryModule } from "./country/country.module";
+import { PropertyModule } from "./property/property.module";
+import { UnitModule } from "./unit/unit.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { HealthModule } from "./health/health.module";
@@ -16,8 +16,8 @@ import { GraphQLModule } from "@nestjs/graphql";
   controllers: [],
   imports: [
     UserModule,
-    DatumModule,
-    CountryModule,
+    PropertyModule,
+    UnitModule,
     ACLModule,
     AuthModule,
     HealthModule,

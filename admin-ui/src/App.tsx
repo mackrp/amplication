@@ -9,14 +9,14 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
-import { DatumList } from "./datum/DatumList";
-import { DatumCreate } from "./datum/DatumCreate";
-import { DatumEdit } from "./datum/DatumEdit";
-import { DatumShow } from "./datum/DatumShow";
-import { CountryList } from "./country/CountryList";
-import { CountryCreate } from "./country/CountryCreate";
-import { CountryEdit } from "./country/CountryEdit";
-import { CountryShow } from "./country/CountryShow";
+import { PropertyList } from "./property/PropertyList";
+import { PropertyCreate } from "./property/PropertyCreate";
+import { PropertyEdit } from "./property/PropertyEdit";
+import { PropertyShow } from "./property/PropertyShow";
+import { UnitList } from "./unit/UnitList";
+import { UnitCreate } from "./unit/UnitCreate";
+import { UnitEdit } from "./unit/UnitEdit";
+import { UnitShow } from "./unit/UnitShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -51,18 +51,18 @@ const App = (): React.ReactElement => {
           show={UserShow}
         />
         <Resource
-          name="Datum"
-          list={DatumList}
-          edit={DatumEdit}
-          create={DatumCreate}
-          show={DatumShow}
+          name="Property"
+          list={PropertyList}
+          edit={PropertyEdit}
+          create={PropertyCreate}
+          show={PropertyShow}
         />
         <Resource
-          name="Country"
-          list={CountryList}
-          edit={CountryEdit}
-          create={CountryCreate}
-          show={CountryShow}
+          name="Unit"
+          list={UnitList}
+          edit={UnitEdit}
+          create={UnitCreate}
+          show={UnitShow}
         />
       </Admin>
     </div>
