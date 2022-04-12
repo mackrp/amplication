@@ -13,10 +13,10 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
-import { IsOptional, IsEnum } from "class-validator";
+import { IsOptional, ValidateNested } from "class-validator";
+import { CountryWhereUniqueInput } from "../../country/base/CountryWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
-import { EnumDatumUsCan } from "./EnumDatumUsCan";
 @InputType()
 class DatumWhereInput {
   @ApiProperty({
@@ -29,6 +29,18 @@ class DatumWhereInput {
     nullable: true,
   })
   address?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => CountryWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CountryWhereUniqueInput)
+  @IsOptional()
+  @Field(() => CountryWhereUniqueInput, {
+    nullable: true,
+  })
+  country?: CountryWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -73,16 +85,5 @@ class DatumWhereInput {
     nullable: true,
   })
   notes?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumDatumUsCan,
-  })
-  @IsEnum(EnumDatumUsCan)
-  @IsOptional()
-  @Field(() => EnumDatumUsCan, {
-    nullable: true,
-  })
-  usCan?: "US" | "CA";
 }
 export { DatumWhereInput };

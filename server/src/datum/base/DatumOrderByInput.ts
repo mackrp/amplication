@@ -34,6 +34,15 @@ class DatumOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  countryId?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   createdAt?: SortOrder;
 
   @ApiProperty({
@@ -80,15 +89,6 @@ class DatumOrderByInput {
     nullable: true,
   })
   updatedAt?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
-  usCan?: SortOrder;
 }
 
 export { DatumOrderByInput };

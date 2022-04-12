@@ -10,7 +10,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "nestjs-prisma";
-import { Prisma, Datum } from "@prisma/client";
+import { Prisma, Datum, Country } from "@prisma/client";
 
 export class DatumServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -45,5 +45,13 @@ export class DatumServiceBase {
     args: Prisma.SelectSubset<T, Prisma.DatumDeleteArgs>
   ): Promise<Datum> {
     return this.prisma.datum.delete(args);
+  }
+
+  async getCountry(parentId: string): Promise<Country | null> {
+    return this.prisma.datum
+      .findUnique({
+        where: { id: parentId },
+      })
+      .country();
   }
 }
