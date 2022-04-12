@@ -20,16 +20,20 @@ model User {
 
 model Datum {
   address    String?
-  createdAt  DateTime        @default(now())
-  id         String          @id @default(cuid())
+  country    Country? @relation(fields: [countryId], references: [id])
+  countryId  String?
+  createdAt  DateTime @default(now())
+  id         String   @id @default(cuid())
   internalId Int?
   name       String?
   notes      String?
-  updatedAt  DateTime        @updatedAt
-  usCan      EnumDatumUsCan?
+  updatedAt  DateTime @updatedAt
 }
 
-enum EnumDatumUsCan {
-  US
-  CA
+model Country {
+  createdAt DateTime @default(now())
+  data      Datum[]
+  id        String   @id @default(cuid())
+  name      String
+  updatedAt DateTime @updatedAt
 }

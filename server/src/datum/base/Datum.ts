@@ -11,9 +11,15 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsDate, IsInt, IsEnum } from "class-validator";
+import {
+  IsString,
+  IsOptional,
+  ValidateNested,
+  IsDate,
+  IsInt,
+} from "class-validator";
+import { Country } from "../../country/base/Country";
 import { Type } from "class-transformer";
-import { EnumDatumUsCan } from "./EnumDatumUsCan";
 @ObjectType()
 class Datum {
   @ApiProperty({
@@ -26,6 +32,15 @@ class Datum {
     nullable: true,
   })
   address!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => Country,
+  })
+  @ValidateNested()
+  @Type(() => Country)
+  @IsOptional()
+  country?: Country | null;
 
   @ApiProperty({
     required: true,
@@ -83,16 +98,5 @@ class Datum {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumDatumUsCan,
-  })
-  @IsEnum(EnumDatumUsCan)
-  @IsOptional()
-  @Field(() => EnumDatumUsCan, {
-    nullable: true,
-  })
-  usCan?: "US" | "CA" | null;
 }
 export { Datum };

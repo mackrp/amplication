@@ -11,8 +11,9 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsInt, IsEnum } from "class-validator";
-import { EnumDatumUsCan } from "./EnumDatumUsCan";
+import { IsString, IsOptional, ValidateNested, IsInt } from "class-validator";
+import { CountryWhereUniqueInput } from "../../country/base/CountryWhereUniqueInput";
+import { Type } from "class-transformer";
 @InputType()
 class DatumCreateInput {
   @ApiProperty({
@@ -25,6 +26,18 @@ class DatumCreateInput {
     nullable: true,
   })
   address?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => CountryWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CountryWhereUniqueInput)
+  @IsOptional()
+  @Field(() => CountryWhereUniqueInput, {
+    nullable: true,
+  })
+  country?: CountryWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
@@ -58,16 +71,5 @@ class DatumCreateInput {
     nullable: true,
   })
   notes?: string | null;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumDatumUsCan,
-  })
-  @IsEnum(EnumDatumUsCan)
-  @IsOptional()
-  @Field(() => EnumDatumUsCan, {
-    nullable: true,
-  })
-  usCan?: "US" | "CA" | null;
 }
 export { DatumCreateInput };

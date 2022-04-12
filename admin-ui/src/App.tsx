@@ -13,6 +13,10 @@ import { DatumList } from "./datum/DatumList";
 import { DatumCreate } from "./datum/DatumCreate";
 import { DatumEdit } from "./datum/DatumEdit";
 import { DatumShow } from "./datum/DatumShow";
+import { CountryList } from "./country/CountryList";
+import { CountryCreate } from "./country/CountryCreate";
+import { CountryEdit } from "./country/CountryEdit";
+import { CountryShow } from "./country/CountryShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -52,6 +56,13 @@ const App = (): React.ReactElement => {
           edit={DatumEdit}
           create={DatumCreate}
           show={DatumShow}
+        />
+        <Resource
+          name="Country"
+          list={CountryList}
+          edit={CountryEdit}
+          create={CountryCreate}
+          show={CountryShow}
         />
       </Admin>
     </div>

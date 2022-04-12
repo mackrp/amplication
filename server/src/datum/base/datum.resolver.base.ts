@@ -25,6 +25,7 @@ import { DeleteDatumArgs } from "./DeleteDatumArgs";
 import { DatumFindManyArgs } from "./DatumFindManyArgs";
 import { DatumFindUniqueArgs } from "./DatumFindUniqueArgs";
 import { Datum } from "./Datum";
+import { Country } from "../../country/base/Country";
 import { DatumService } from "../datum.service";
 
 @graphql.Resolver(() => Datum)
@@ -131,7 +132,15 @@ export class DatumResolverBase {
     // @ts-ignore
     return await this.service.create({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        country: args.data.country
+          ? {
+              connect: args.data.country,
+            }
+          : undefined,
+      },
     });
   }
 
@@ -170,7 +179,15 @@ export class DatumResolverBase {
       // @ts-ignore
       return await this.service.update({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          country: args.data.country
+            ? {
+                connect: args.data.country,
+              }
+            : undefined,
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -202,5 +219,29 @@ export class DatumResolverBase {
       }
       throw error;
     }
+  }
+
+  @graphql.ResolveField(() => Country, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Datum",
+    action: "read",
+    possession: "any",
+  })
+  async country(
+    @graphql.Parent() parent: Datum,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<Country | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "Country",
+    });
+    const result = await this.service.getCountry(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return permission.filter(result);
   }
 }

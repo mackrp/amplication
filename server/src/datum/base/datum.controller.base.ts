@@ -70,16 +70,30 @@ export class DatumControllerBase {
       );
     }
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        country: data.country
+          ? {
+              connect: data.country,
+            }
+          : undefined,
+      },
       select: {
         address: true,
+
+        country: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         internalId: true,
         name: true,
         notes: true,
         updatedAt: true,
-        usCan: true,
       },
     });
   }
@@ -114,13 +128,19 @@ export class DatumControllerBase {
       ...args,
       select: {
         address: true,
+
+        country: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         internalId: true,
         name: true,
         notes: true,
         updatedAt: true,
-        usCan: true,
       },
     });
     return results.map((result) => permission.filter(result));
@@ -154,13 +174,19 @@ export class DatumControllerBase {
       where: params,
       select: {
         address: true,
+
+        country: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         internalId: true,
         name: true,
         notes: true,
         updatedAt: true,
-        usCan: true,
       },
     });
     if (result === null) {
@@ -212,16 +238,30 @@ export class DatumControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          country: data.country
+            ? {
+                connect: data.country,
+              }
+            : undefined,
+        },
         select: {
           address: true,
+
+          country: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
           internalId: true,
           name: true,
           notes: true,
           updatedAt: true,
-          usCan: true,
         },
       });
     } catch (error) {
@@ -256,13 +296,19 @@ export class DatumControllerBase {
         where: params,
         select: {
           address: true,
+
+          country: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
           internalId: true,
           name: true,
           notes: true,
           updatedAt: true,
-          usCan: true,
         },
       });
     } catch (error) {
